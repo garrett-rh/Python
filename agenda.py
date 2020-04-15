@@ -151,7 +151,8 @@ def manage():
         with open('/home/garrett/schedule.txt', 'w') as f:
             for i in c:
                 f.write(f"{i[4]:15} {i[1]} {i[2]:10} {i[3]}\n")
-
+        print("Exported table to home folder...")
+        menu()
     def addEntry():
         c.execute("SELECT ID FROM agenda")
         idNum = c.fetchall()
@@ -172,14 +173,16 @@ def manage():
             addEntry()
         else:
             menu()
-    manageChoice = int(input("1)Add Entry\n2)Remove Entry\n3)Delete Table\n4)Export Table\n-->"))
+    manageChoice = int(input("1)Add Entry\n2)Remove Entry\n3)Export Table\n4)Delete Table\n-->"))
 
 
     if manageChoice == 1:
         addEntry()
     elif manageChoice == 2:
         removeEntry()
-    elif manageChoice ==3:
+    elif manageChoice == 3:
+        export()
+    elif manageChoice == 4:
         yN = str(input("Are you sure you want to delete the agenda? (y/n)"))
         if "y" in yN.lower():
             c.execute("DELETE FROM agenda")
@@ -188,8 +191,6 @@ def manage():
             main()
         else:
             manage()
-    elif manageChoice == 4:
-        export()
     else:
         print("Please enter a proper answer")
         manage()
