@@ -126,6 +126,7 @@ def edit():
         edit()
     else:
         pass
+    
 def manage():
     
     def removeEntry():
@@ -159,10 +160,18 @@ def manage():
     def addEntry():
         c.execute("SELECT ID FROM agenda")
         idNum = c.fetchall()
-        if not idNum:
-            newID = 0
+        idList = []
+        for i in idNum:
+            for a in i:
+                idList.append(a)
+                print(idList)
+        if 0 not in idList:
+                newID = 0
         else:
-            newID = max(idNum); newID = newID[0] + 1
+            newID = 0
+            while newID in idList:
+                newID +=1
+                    
         dueDate  = str(input("Enter due date: "))
         dueDate = dueDate.zfill(5)
         course = str(input("Enter course: "))
@@ -188,8 +197,28 @@ def manage():
     elif manageChoice == 4:
         yN = str(input("Are you sure you want to delete the agenda? (y/n)"))
         if "y" in yN.lower():
+
+            keepUnfinished = str(input("Would you like to keep all items without a status of 'Finished'?"))
+            if "y" in keepUnfinished.lower():
+                c.execute("SELECT * FROM agenda WHERE status != 'Finished'")
+                data = c.fetchall()
+            else:
+                pass
+    
             c.execute("DELETE FROM agenda")
             conn.commit()
+            
+            c.execute("""CREATE TABLE IF NOT EXISTS agenda(
+                ID integer,
+                date text,
+                class text,
+                assignment text,
+                status text
+                )"""
+                )
+            for i in data:
+                c.execute("INSERT INTO agenda(ID, date, class, assignment, status) VALUES(?,?,?,?,?)", (i[0], i[1], i[2], i[3], i[4]))
+                conn.commit()
             print("Database deleted")
             main()
         else:
@@ -200,3 +229,4 @@ def manage():
 
 if __name__ == "__main__":
     main()
+    
