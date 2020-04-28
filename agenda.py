@@ -22,7 +22,7 @@ def start():
         status text
         )"""
         )
-        conn.commit()
+    conn.commit()
 
 #Takes user input, then adds calls appropriate function, waits for "Enter" then returns to menu.
 def menu():
