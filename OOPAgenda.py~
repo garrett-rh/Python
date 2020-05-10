@@ -1,0 +1,44 @@
+#!/usr/bin/python3
+
+import sqlite3
+
+class Database:
+
+    DATABASE_LOCATION = '/home/garrett/.agenda/agenda.db'
+
+    def __init__(self, conn, c)
+        self.conn = sqlite3.connect(DATABASE_LOCATION)
+        self.c = conn.cursor()
+
+    def create_table(self):
+        self.c.execute("""CREATE TABLE IF NOT EXISTS agenda(
+                ID integer,
+                date text,
+                class text,
+                assignment text,
+                status text
+                )"""
+                )
+        Database.commit()
+
+    def commit(self):
+        self.conn.commit()
+
+    def close(self):
+        self.conn.commit()
+        self.conn.close()
+
+    def menu(self):
+        choice = input("""Choose one of the following options:
+        1) View by Date.
+        2) View by Course.
+        3) View by Status.
+        4) Edit the Agenda.
+        5) Manage the Agenda.
+        99) Quit.
+        -->""")
+        
+        choice_list = [1, 2, 3, 4, 5, 99]
+        if choice.isdigit() not True or choice not in choice_list:
+            print("Not a proper input. Please try again.")
+            Database.menu()
