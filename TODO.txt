@@ -2,4 +2,5 @@
 
 Currently thinking about adding and editing the following to agenda.py:
 
-	Finish up OOP Agenda.
+	No current plans. I will add features if I need or want them.
+	Suggestions are always welcomed.
