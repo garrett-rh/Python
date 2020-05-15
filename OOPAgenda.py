@@ -46,17 +46,14 @@ def View(choice):
     with Database() as db:
         query_in_list = db.select_all()
     if choice == 1:
-        query_in_list.sort(key = lambda query_in_list: query_in_list[1])
-        for i in query_in_list:
-            print(f"{i[4]:15} {i[1]} {i[2]:10} {i[3]}")
+        view_method = 1
     elif choice == 2:
-        query_in_list.sort(key = lambda query_in_list: query_in_list[2])
-        for i in query_in_list:
-            print(f"{i[4]:15}{i[1]} {i[2]:10} {i[3]}")
+        view_method = 2
     elif choice == 3:
-        query_in_list.sort(key = lambda query_in_list: query_in_list[4])
-        for i in query_in_list:
-            print(f"{i[4]:15}{i[1]} {i[2]:10} {i[3]}")
+        view_method = 4
+    query_in_list.sort(key = lambda query_in_list: query_in_list[view_method])
+    for i in query_in_list:
+        print(f"{i[4]:15} {i[1]} {i[2]:10} {i[3]}")
 
 def Edit():
     with Database() as db:
