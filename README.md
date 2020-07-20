@@ -7,6 +7,7 @@ To get this to run on your machine, please run setup.py.
 Follow the following steps after cloning the repo:
 
 	chmod 700 *.py
+	Make the directory for the agenda.db file
 	./setup.py
 	Edit the 8th line of agenda.py to match your database location.
 	        self.conn = sqlite3.connect('/your/database/location/here')

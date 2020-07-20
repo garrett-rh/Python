@@ -23,5 +23,6 @@ For example, If I want to store it at /home/user/.agenda/agenda.db make sure tha
                 )
     else:
         print("Please rerun setup.py")
-finally:
+except error as e:
+    print(f"Error message: {e}")
     print("An error occurred. Please rerun setup.py")
